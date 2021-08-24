@@ -1,0 +1,75 @@
+<div class="card">
+  <div class="card-content table-responsive table-full-width">
+    <table class="table">
+      <thead class="text-danger">
+        <th>Customer #</th>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Room Name</th>
+        <th>Payment Received</th>
+        <th>Total Dues</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+        <tr *ngIf="orderDetials.length < 1">
+          <td colspan="7"><strong>No Data To Display</strong></td>
+        </tr>
+        <ng-container [formGroup]="orderForm">
+          <ng-container formArrayName="orderDetails">
+            <ng-container
+              *ngFor="let customer of orderDetials.controls; let $index = index"
+            >
+              <tr [formGroupName]="$index">
+                <td>{{ customers[$index].id }}</td>
+                <td>{{ customers[$index].name }}</td>
+                <td>
+                  <mat-form-field>
+                    <input
+                      matInput
+                      type="number"
+                      placeholder="Enter Quantity"
+                      formControlName="quantity"
+                    />
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field>
+                    <mat-label>Room</mat-label>
+                    <mat-select formControlName="roomId">
+                      <mat-option *ngFor="let room of rooms" [value]="room.id">
+                        {{ room.name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field>
+                    <input
+                      matInput
+                      type="number"
+                      placeholder="Enter Payment"
+                      formControlName="payment"
+                    />
+                  </mat-form-field>
+                </td>
+                <td>{{ customers[$index].remaining_amount }}</td>
+                <td>
+                  <button
+                    [disabled]="
+                      checkIsValid(orderDetials.controls[$index].value)
+                    "
+                    mat-raised-button
+                    class="btn btn-success"
+                    (click)="placeOrder($index)"
+                  >
+                    <i class="material-icons">done</i>Create
+                  </button>
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>

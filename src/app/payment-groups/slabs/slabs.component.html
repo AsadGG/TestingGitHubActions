@@ -1,0 +1,96 @@
+<div class="card">
+  <div class="card-header card-header-success">
+    <h4 class="card-title">Create New Ice-Slab Price</h4>
+  </div>
+  <div class="card-content table-responsive table-full-width">
+    <form [formGroup]="addSlabForm" (ngSubmit)="createSlab()">
+      <table class="table">
+        <thead class="text-danger">
+          <th>Price Details</th>
+          <th>Price Per Slab (PKR)</th>
+          <th>Add</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <mat-form-field>
+                <input
+                  formControlName="name"
+                  matInput
+                  type="text"
+                  placeholder="Enter Details"
+                />
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field>
+                <input
+                  formControlName="amount"
+                  matInput
+                  type="number"
+                  placeholder="Enter Price"
+                />
+              </mat-form-field>
+            </td>
+            <td>
+              <button
+                type="submit"
+                [disabled]="!addSlabForm.valid"
+                mat-raised-button
+                class="btn btn-success"
+              >
+                <i class="material-icons">done</i>Create
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header card-header-warning">
+    <h4 class="card-title">Available Ice-Slab Prices</h4>
+  </div>
+  <div class="card-content table-responsive table-full-width">
+    <table class="table">
+      <thead class="text-danger">
+        <th>Serial Number</th>
+        <th>Name</th>
+        <th>Amount</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+        <tr *ngIf="slabsList.length < 1">
+          <td colspan="4"><strong>No Data To Display</strong></td>
+        </tr>
+        <tr *ngFor="let slab of slabsList">
+          <td>{{ slab.id }}</td>
+          <td>{{ slab.name }}</td>
+          <td>{{ slab.amount }}</td>
+          <td>
+            <div class="dropdown">
+              <button
+                href="#"
+                class="btn dropdown-toggle"
+                data-toggle="dropdown"
+                aria-expanded="true"
+              >
+                <i class="material-icons">more_vert</i>
+              </button>
+              <ul class="dropdown-menu">
+                <li (click)="confirmDeleteDialog(slab.id)">
+                  <a class="delete">Delete</a>
+                </li>
+                <li (click)="openEditDialog(slab.id, slab.name, slab.amount)">
+                  <a class="edit">Edit</a>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

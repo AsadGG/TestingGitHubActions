@@ -1,0 +1,43 @@
+<div class="card">
+  <div class="card-content table-responsive table-full-width">
+    <table class="table">
+      <thead class="text-danger">
+        <th>Payment #</th>
+        <th>Customer Name</th>
+        <th>Payment Date</th>
+        <th>Payment Amount</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+        <tr *ngIf="todaysPayments.length < 1">
+          <td colspan="5"><strong>No New Payment Today</strong></td>
+        </tr>
+        <tr *ngFor="let payment of todaysPayments">
+          <td>{{ payment.id }}</td>
+          <td>{{ payment.customer.name }}</td>
+          <td>{{ getPaymentDate(payment.createdAt) }}</td>
+          <td>{{ payment.amount }}</td>
+          <td>
+            <button
+              (click)="onDelete(payment.id)"
+              mat-raised-button
+              class="btn btn-danger"
+            >
+              <i class="material-icons">cancel</i> Delete
+            </button>
+          </td>
+        </tr>
+
+        <tr *ngIf="todaysPayments.length > 1">
+          <td><strong>Total</strong></td>
+          <td></td>
+          <td></td>
+          <td>
+            <strong>{{ calculateTotalAmount(this.todaysPayments) }}</strong>
+          </td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

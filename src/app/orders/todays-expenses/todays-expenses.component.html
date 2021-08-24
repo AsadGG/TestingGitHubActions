@@ -1,0 +1,119 @@
+<div class="card">
+  <div class="card-header card-header-success">
+    <h4 class="card-title">Add Expense</h4>
+  </div>
+  <div class="card-content table-responsive table-full-width">
+    <form [formGroup]="addExpenseForm" (ngSubmit)="createExpense()">
+      <table class="table">
+        <thead class="text-danger">
+          <th>Expense Type</th>
+          <th>Expense Reason</th>
+          <th>Expense Amount</th>
+          <th>Add</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <mat-form-field>
+                <mat-label>Type</mat-label>
+                <mat-select formControlName="expenseTypeId">
+                  <mat-option
+                    *ngFor="let expenseType of expenseTypes"
+                    [value]="expenseType.id"
+                  >
+                    {{ expenseType.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field>
+                <input
+                  formControlName="reason"
+                  matInput
+                  type="text"
+                  placeholder="Enter Reason"
+                />
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field>
+                <input
+                  formControlName="amount"
+                  matInput
+                  type="number"
+                  placeholder="Enter Amount"
+                />
+              </mat-form-field>
+            </td>
+            <td>
+              <button
+                [disabled]="!addExpenseForm.valid"
+                mat-raised-button
+                class="btn btn-success"
+              >
+                <i class="material-icons">done</i>Create
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header card-header-warning">
+    <h4 class="card-title">Todays Expenses</h4>
+  </div>
+  <div class="card-content table-responsive table-full-width">
+    <table class="table">
+      <thead class="text-danger">
+        <th>Expense #</th>
+        <th>Reason</th>
+        <th>Amount</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+        <tr *ngIf="expensesList.length < 1">
+          <td colspan="4"><strong>No New Expense Today</strong></td>
+        </tr>
+        <tr *ngFor="let expense of expensesList">
+          <td>{{ expense.id }}</td>
+          <td>{{ expense.reason }}</td>
+          <td>{{ expense.amount }}</td>
+          <td>
+            <div class="dropdown">
+              <button
+                href="#"
+                class="btn dropdown-toggle"
+                data-toggle="dropdown"
+                aria-expanded="true"
+              >
+                <i class="material-icons">more_vert</i>
+              </button>
+              <ul class="dropdown-menu">
+                <li (click)="confirmDeleteDialog(expense.id)">
+                  <a class="delete">Delete</a>
+                </li>
+                <li
+                  (click)="
+                    openEditDialog(expense.id, expense.reason, expense.amount)
+                  "
+                >
+                  <a class="edit">Edit</a>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="expensesList.length > 1">
+          <td>Total</td>
+          <td></td>
+          <td>{{ calculateTotalAmount(this.expensesList) }}</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

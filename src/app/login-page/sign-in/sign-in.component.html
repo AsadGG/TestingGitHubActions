@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-md-12">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="card">
+        <div class="col-md-12 mt-4 mb-4">
+          <mat-form-field>
+            <input
+              matInput
+              type="text"
+              placeholder="Enter Username"
+              name="username"
+              id="username"
+              formControlName="username"
+              required
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-md-12 mb-4">
+          <mat-form-field>
+            <input
+              matInput
+              type="password"
+              placeholder="Enter Password"
+              name="password"
+              id="password"
+              formControlName="password"
+              required
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-md-12 mb-4 d-flex justify-content-center">
+          <button
+            [disabled]="loginForm.invalid"
+            type="submit"
+            mat-raised-button
+            class="btn btn-success button-width"
+          >
+            <i class="material-icons">done</i> LOGIN
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

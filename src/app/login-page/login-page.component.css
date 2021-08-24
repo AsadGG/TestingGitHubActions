@@ -1,0 +1,10 @@
+.nav-item {
+  width: 40%;
+  text-align: center;
+}
+.nav-tabs {
+  justify-content: center;
+}
+.margin {
+  margin-top: 8rem;
+}

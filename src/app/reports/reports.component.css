@@ -1,0 +1,12 @@
+td,
+th {
+  text-align: center;
+}
+.bold,
+.bold > th {
+  font-weight: bold;
+}
+
+.button-size {
+  width: 13rem;
+}

@@ -1,0 +1,83 @@
+<div class="card mb-5">
+  <div class="card-header card-header-success">
+    <h4 class="card-title">Create New ExpenseType</h4>
+  </div>
+  <div class="card-content table-responsive table-full-width">
+    <form [formGroup]="addExpensesTypeForm" (ngSubmit)="createExpensesType()">
+      <table class="table">
+        <thead class="text-danger">
+          <th>ExpenseType Name</th>
+          <th>Action</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <mat-form-field>
+                <input
+                  formControlName="name"
+                  matInput
+                  type="text"
+                  placeholder="Enter ExpenseType Name"
+                />
+              </mat-form-field>
+            </td>
+            <td>
+              <button
+                type="submit"
+                [disabled]="!addExpensesTypeForm.valid"
+                mat-raised-button
+                class="btn btn-success"
+              >
+                <i class="material-icons">done</i>Create
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header card-header-warning">
+    <h4 class="card-title">List of Available ExpensesType</h4>
+  </div>
+  <div class="card-content table-responsive table-full-width">
+    <table class="table">
+      <thead class="text-danger">
+        <th>Expense ID</th>
+        <th>Expense Name</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+        <tr *ngIf="expensesTypeList.length < 1">
+          <td colspan="3"><strong>No Data To Display</strong></td>
+        </tr>
+        <tr *ngFor="let expenseType of expensesTypeList">
+          <td>{{ expenseType.id }}</td>
+          <td>{{ expenseType.name }}</td>
+          <td>
+            <div class="dropdown">
+              <button
+                href="#"
+                class="btn dropdown-toggle"
+                data-toggle="dropdown"
+                aria-expanded="true"
+              >
+                <i class="material-icons">more_vert</i>
+              </button>
+              <ul class="dropdown-menu">
+                <li (click)="confirmDeleteDialog(expenseType.id)">
+                  <a class="delete">Delete</a>
+                </li>
+                <li (click)="openEditDialog(expenseType.id, expenseType.name)">
+                  <a class="edit">Edit</a>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

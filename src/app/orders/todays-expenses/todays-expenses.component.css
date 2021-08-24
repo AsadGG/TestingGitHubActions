@@ -1,0 +1,14 @@
+td,
+th {
+  text-align: center;
+}
+.dropdown-toggle:after {
+  content: none;
+}
+.delete:hover {
+  background-color: #f55145;
+}
+
+.edit:hover {
+  background-color: #ff9e0f;
+}

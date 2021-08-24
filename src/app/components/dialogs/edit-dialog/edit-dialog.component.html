@@ -1,0 +1,103 @@
+<ng-container *ngIf="data.template === 'editRoom'">
+  <h1 mat-dialog-title>Edit Room</h1>
+  <form [formGroup]="editRoomForm">
+    <div mat-dialog-content>
+      <mat-form-field appearance="fill">
+        <mat-label>Room Name</mat-label>
+        <input type="hidden" formControlName="roomId" />
+        <input formControlName="name" matInput />
+      </mat-form-field>
+    </div>
+    <mat-dialog-actions align="end" class="mt-3">
+      <button class="btn" mat-button mat-dialog-close>Cancel</button>
+      <button
+        class="btn btn-primary"
+        [disabled]="!editRoomForm.dirty"
+        mat-button
+        (click)="sendDataToSubscriberRoom()"
+      >
+        Update
+      </button>
+    </mat-dialog-actions>
+  </form>
+</ng-container>
+
+<ng-container *ngIf="data.template === 'editSlab'">
+  <h1 mat-dialog-title>Edit Slab</h1>
+  <form [formGroup]="editSlabForm">
+    <div mat-dialog-content>
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input type="hidden" formControlName="slabId" />
+        <input formControlName="name" matInput />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Amount</mat-label>
+        <input type="number" formControlName="amount" matInput />
+      </mat-form-field>
+    </div>
+    <mat-dialog-actions align="end" class="mt-3">
+      <button class="btn" mat-button mat-dialog-close>Cancel</button>
+      <button
+        class="btn btn-primary"
+        [disabled]="!editSlabForm.dirty"
+        mat-button
+        (click)="sendDataToSubscriberSlab()"
+      >
+        Update
+      </button>
+    </mat-dialog-actions>
+  </form>
+</ng-container>
+
+<ng-container *ngIf="data.template === 'editExpensesType'">
+  <h1 mat-dialog-title>Edit ExpensesType</h1>
+  <form [formGroup]="editExpensesTypeForm">
+    <div mat-dialog-content>
+      <mat-form-field appearance="fill">
+        <mat-label>ExpensesType Name</mat-label>
+        <input type="hidden" formControlName="ExpensesTypeId" />
+        <input formControlName="name" matInput />
+      </mat-form-field>
+    </div>
+    <mat-dialog-actions align="end" class="mt-3">
+      <button class="btn" mat-button mat-dialog-close>Cancel</button>
+      <button
+        class="btn btn-primary"
+        [disabled]="!editExpensesTypeForm.dirty"
+        mat-button
+        (click)="sendDataToSubscriberExpensesType()"
+      >
+        Update
+      </button>
+    </mat-dialog-actions>
+  </form>
+</ng-container>
+
+<ng-container *ngIf="data.template === 'editExpense'">
+  <h1 mat-dialog-title>Edit Expenses</h1>
+  <form [formGroup]="editExpensesForm">
+    <div mat-dialog-content>
+      <mat-form-field appearance="fill">
+        <mat-label>Expenses Reason</mat-label>
+        <input type="hidden" formControlName="expenseId" />
+        <input formControlName="reason" matInput />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Expenses Amount</mat-label>
+        <input type="number" formControlName="amount" matInput />
+      </mat-form-field>
+    </div>
+    <mat-dialog-actions align="end" class="mt-3">
+      <button class="btn" mat-button mat-dialog-close>Cancel</button>
+      <button
+        class="btn btn-primary"
+        [disabled]="!editExpensesForm.dirty"
+        mat-button
+        (click)="sendDataToSubscriberExpenses()"
+      >
+        Update
+      </button>
+    </mat-dialog-actions>
+  </form>
+</ng-container>

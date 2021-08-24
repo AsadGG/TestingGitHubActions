@@ -1,0 +1,80 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="card">
+              <div class="card-content table-responsive table-full-width">
+                <table class="table">
+                  <thead class="text-danger">
+                    <tr class="bold">
+                      <th colspan="6">{{ customer.name }}</th>
+                    </tr>
+                    <tr class="bold">
+                      <th>Date</th>
+                      <th>Type</th>
+                      <th>Blocks</th>
+
+                      <th>Payment</th>
+                      <th>Rate</th>
+                      <th>Order Amount</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr *ngFor="let item of customerReports">
+                      <td>{{ showDate(item.createdAt) }}</td>
+                      <td>
+                        {{ item.order !== null ? "Order" : "Payment" }}
+                      </td>
+                      <td>
+                        {{
+                          item.order !== null ? item.order.quantity : "---NA---"
+                        }}
+                      </td>
+
+                      <td>
+                        {{
+                          item.order === null
+                            ? item.transactionAmount
+                            : "---NA---"
+                        }}
+                      </td>
+                      <td>
+                        {{
+                          item.order !== null
+                            ? item.order.pricePerSlabAmount
+                            : "---NA---"
+                        }}
+                      </td>
+                      <td>
+                        {{
+                          item.order !== null ? item.order.amount : "---NA---"
+                        }}
+                      </td>
+                    </tr>
+                    <tr class="bold">
+                      <td>Total</td>
+
+                      <th></th>
+                      <td>
+                        {{ totalBlocks }}
+                      </td>
+
+                      <td>
+                        {{ totalPayment }}
+                      </td>
+                      <th></th>
+                      <th>{{ TotalAmount }}</th>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

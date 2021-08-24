@@ -1,0 +1,8 @@
+td,
+th {
+  text-align: center;
+}
+.bold,
+.bold > th {
+  font-weight: bold;
+}

@@ -1,0 +1,81 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header card-header-tabs card-header-info">
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+                <ul class="nav nav-tabs" data-tabs="tabs">
+                  <li class="nav-item">
+                    <a
+                      routerLinkActive="active"
+                      mat-button
+                      class="nav-link"
+                      routerLink="create"
+                      data-toggle="tab"
+                    >
+                      Create Orders
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      routerLinkActive="active"
+                      mat-button
+                      class="nav-link"
+                      routerLink="todays-orders"
+                      data-toggle="tab"
+                    >
+                      Todays Orders
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      routerLinkActive="active"
+                      mat-button
+                      class="nav-link"
+                      routerLink="todays-payments"
+                      data-toggle="tab"
+                    >
+                      Todays Payments
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      routerLinkActive="active"
+                      mat-button
+                      class="nav-link"
+                      routerLink="todays-expenses"
+                      data-toggle="tab"
+                    >
+                      Todays Expense
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      routerLinkActive="active"
+                      mat-button
+                      class="nav-link"
+                      routerLink="todays-summary"
+                      data-toggle="tab"
+                    >
+                      Todays Summary
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

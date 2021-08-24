@@ -1,0 +1,50 @@
+<div class="logo">
+  <a routerLink="orders" class="simple-text">
+    <div class="logo-img">
+      <img src="/assets/img/angular2-logo-red.png" />
+    </div>
+    Ice Factory
+  </a>
+</div>
+<div class="sidebar-wrapper">
+  <div *ngIf="isMobileMenu()">
+    <ul class="nav navbar-nav nav-mobile-menu">
+      <li class="nav-item">
+        <a class="nav-link" href="javascript:void(0)">
+          <i class="material-icons">person</i>
+          <p>
+            <span class="d-lg-none d-md-block">Username</span>
+          </p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="javascript:void(0)">
+          <i class="material-icons">settings</i>
+          <p>
+            <span class="d-lg-none d-md-block">Settings</span>
+          </p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="javascript:void(0)">
+          <i class="material-icons">logout</i>
+          <p>
+            <span class="d-lg-none d-md-block">Logout</span>
+          </p>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <ul class="nav">
+    <li
+      routerLinkActive="active"
+      *ngFor="let menuItem of menuItems"
+      class="{{ menuItem.class }} nav-item"
+    >
+      <a class="nav-link" [routerLink]="[menuItem.path]">
+        <i class="material-icons">{{ menuItem.icon }}</i>
+        <p>{{ menuItem.title }}</p>
+      </a>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,218 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <form [formGroup]="reportForm" (ngSubmit)="onGenerateReport()">
+              <div class="row justify-content-center">
+                <div
+                  class="
+                    col-12 col-md-4 col-lg-4 col-xl-2
+                    mx-xl-3
+                    d-flex
+                    justify-content-center
+                  "
+                >
+                  <mat-form-field class="example-full-width">
+                    <input
+                      matInput
+                      [matDatepicker]="startDate"
+                      placeholder="Start Date"
+                      [min]="minDate"
+                      [max]="maxDate"
+                      [value]="currentDate"
+                      formControlName="startDate"
+                      disabled
+                    />
+                    <mat-datepicker-toggle
+                      [for]="startDate"
+                      matSuffix
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker
+                      disabled="false"
+                      #startDate
+                    ></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div
+                  class="
+                    col-12 col-md-4 col-lg-4 col-xl-2
+                    mx-xl-3
+                    d-flex
+                    justify-content-center
+                  "
+                >
+                  <mat-form-field class="example-full-width">
+                    <input
+                      matInput
+                      [matDatepicker]="endDate"
+                      placeholder="End Date"
+                      [min]="minDate"
+                      [max]="maxDate"
+                      [value]="currentDate"
+                      formControlName="endDate"
+                      disabled
+                    />
+                    <mat-datepicker-toggle
+                      [for]="endDate"
+                      matSuffix
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker disabled="false" #endDate></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div
+                  class="
+                    col-12 col-md-4 col-lg-4 col-xl-2
+                    mx-xl-3
+                    d-flex
+                    justify-content-center
+                  "
+                >
+                  <mat-form-field>
+                    <mat-label>Customer</mat-label>
+                    <mat-select formControlName="customerId">
+                      <mat-option
+                        *ngFor="let customer of customersOption"
+                        [value]="customer.id"
+                      >
+                        {{ customer.name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div
+                  class="
+                    col-12 col-md-4 col-lg-4 col-xl-2
+                    mx-xl-3
+                    d-flex
+                    justify-content-center
+                  "
+                >
+                  <button
+                    [disabled]="reportForm.invalid"
+                    mat-raised-button
+                    type="submit"
+                    class="btn btn-success button-size"
+                  >
+                    <i class="material-icons">assignment</i> Generate Report
+                  </button>
+                </div>
+                <div
+                  class="
+                    col-12 col-md-4 col-lg-4 col-xl-2
+                    mx-xl-3
+                    d-flex
+                    justify-content-center
+                  "
+                >
+                  <button
+                    printSectionId="print-section"
+                    [useExistingCss]="true"
+                    ngxPrint
+                    print
+                    mat-raised-button
+                    type="button"
+                    class="btn btn-danger button-size"
+                    [disabled]="!printAble"
+                  >
+                    <i class="material-icons">print</i> Print
+                  </button>
+                </div>
+              </div>
+            </form>
+            <div
+              *ngIf="customerReports.length > 0"
+              class="row justify-content-center mt-5"
+            >
+              <div class="col-10">
+                <div class="card">
+                  <div class="card-content table-responsive table-full-width">
+                    <table class="table">
+                      <thead class="text-danger">
+                        <tr class="bold">
+                          <th colspan="6">{{ customer.name }}</th>
+                        </tr>
+                        <tr class="bold">
+                          <th>Date</th>
+                          <th>Type</th>
+                          <th>Blocks</th>
+
+                          <th>Payment</th>
+                          <th>Rate</th>
+                          <th>Order Amount</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <tr *ngFor="let item of customerReports">
+                          <td>{{ showDate(item.createdAt) }}</td>
+                          <td>
+                            {{ item.order !== null ? "Order" : "Payment" }}
+                          </td>
+                          <td>
+                            {{
+                              item.order !== null
+                                ? item.order.quantity
+                                : "---NA---"
+                            }}
+                          </td>
+
+                          <td>
+                            {{
+                              item.order === null
+                                ? item.transactionAmount
+                                : "---NA---"
+                            }}
+                          </td>
+                          <td>
+                            {{
+                              item.order !== null
+                                ? item.order.pricePerSlabAmount
+                                : "---NA---"
+                            }}
+                          </td>
+                          <td>
+                            {{
+                              item.order !== null
+                                ? item.order.amount
+                                : "---NA---"
+                            }}
+                          </td>
+                        </tr>
+                        <tr class="bold">
+                          <td>Total</td>
+
+                          <th></th>
+                          <td>
+                            {{ totalBlocks }}
+                          </td>
+
+                          <td>
+                            {{ totalPayment }}
+                          </td>
+                          <th></th>
+                          <th>{{ TotalAmount }}</th>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<span *ngIf="printAble" style="display: none">
+  <app-print
+    [customerReports]="customerReports"
+    [totalPayment]="totalPayment"
+    [totalBlocks]="totalBlocks"
+    [TotalAmount]="TotalAmount"
+    [customer]="customer"
+    id="print-section"
+  ></app-print>
+</span>

@@ -1,0 +1,51 @@
+<div class="card">
+  <div class="card-content table-responsive table-full-width">
+    <table class="table">
+      <thead class="text-danger">
+        <th>Serial Number</th>
+        <th>Name</th>
+        <th>Price Per Slab</th>
+        <th>Payment Due</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+        <tr *ngIf="customers.length < 1">
+          <td colspan="5"><strong>No Data To Display</strong></td>
+        </tr>
+
+        <tr *ngFor="let customer of customers">
+          <td>{{ customer.id }}</td>
+          <td>{{ customer.name }}</td>
+          <td>{{ customer.pricePerSlabId }}</td>
+          <td>{{ customer.remaining_amount }}</td>
+          <td>
+            <div class="dropdown">
+              <button
+                href="#"
+                class="btn dropdown-toggle"
+                data-toggle="dropdown"
+                aria-expanded="true"
+              >
+                <i class="material-icons">more_vert</i>
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="delete" (click)="onDelete(customer.id)">Delete</a>
+                </li>
+                <li><a class="edit" (click)="onEdit(customer.id)">Edit</a></li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+
+        <tr *ngIf="customers.length > 1">
+          <td>Total</td>
+          <td></td>
+          <td></td>
+          <td>{{ calculateTotalDue(this.customers) }}</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
