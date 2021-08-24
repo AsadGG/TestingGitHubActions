@@ -7,6 +7,7 @@ import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.compon
 import { EmptyLayoutComponent } from "./layouts/empty-layout/empty-layout.component";
 import { UnauthGuard } from "./guards/unauth.guard";
 import { AuthGuard } from "./guards/auth.guard";
+import { Error404pageComponent } from "./components/error404page/error404page.component";
 
 const routes: Routes = [
   {
@@ -41,6 +42,10 @@ const routes: Routes = [
           ),
       },
     ],
+  },
+  {
+    path: "**",
+    component: Error404pageComponent,
   },
 ];
 
