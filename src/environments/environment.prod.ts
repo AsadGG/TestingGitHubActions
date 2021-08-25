@@ -1,6 +1,6 @@
-let protocol = 'http';
-let domain = '192.3.163.18';
-let port = '4300';
+let protocol = "http";
+let domain = "192.3.163.18";
+let port = "4300";
 
 export const environment = {
   production: true,
